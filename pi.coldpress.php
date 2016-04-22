@@ -22,14 +22,12 @@ class Coldpress {
 		$compressed_folder =  $rootP."/coldpressed_img/";	
 		$compressed_file = $compressed_folder.$fname;
 		//Get parameters
-		//$quality = ee()->TMPL->fetch_param('quality'); MAYBE?
+		//$quality = ee()->TMPL->fetch_param('quality'); Maybe one day?
 
-/*
 		if (!is_writable($compressed_folder)){
 			echo "Cannot write to the server as user: ".get_current_user();
 			exit();
 		} 
-*/
 		
 		if (!file_exists($compressed_folder)) {
 		    mkdir($compressed_folder, 0777, true);
