@@ -42,6 +42,7 @@ class Coldpress {
 			$fi = getimagesize($source_url);
 		    if ($fi['mime'] == 'image/jpeg') {
 			    $image = imagecreatefromjpeg($source_url);
+			    imagejpeg($image, $compressed_file, $quality);	
 		    }elseif ($fi['mime'] == 'image/gif'){
 			    $image = imagecreatefromgif($source_url);
 			    $background = imagecolorallocate($image, 0, 0, 0);
@@ -52,11 +53,11 @@ class Coldpress {
 			    imagecolortransparent($image, $background);
 			    imagealphablending($image, false);
 			    imagesavealpha($image, true);
+			    $quality = (100-$quality)*.1;
+			    imagepng($image, $compressed_file, $quality);	
 		    }
-		
-		    imagejpeg($image, $compressed_file, $quality);	
 		}
-		
+
 		$this->return_data = base_url()."coldpressed_img/".$fname;
 	}
 }
