@@ -34,33 +34,29 @@ class Coldpress {
 			//if the file has 5 digits, XX.XXX KB or greater more aggressive compression
 			$flen = filesize($source_url); 
 		    if($flen > 5){	
-			    $quality = "60";
+			    $quality = "50";
 		    }else{
-			    $quality = "75";
+			    $quality = "65";
 		    }
 	
 			$fi = getimagesize($source_url);
 		    if ($fi['mime'] == 'image/jpeg') {
 			    $image = imagecreatefromjpeg($source_url);
 			    imagejpeg($image, $compressed_file, $quality);	
-		    }elseif ($fi['mime'] == 'image/gif'){
-			    $image = imagecreatefromgif($source_url);
-			    $background = imagecolorallocate($image, 0, 0, 0);
-			    imagecolortransparent($image, $background);
 		    }elseif ($fi['mime'] == 'image/png'){
 			    $image = imagecreatefrompng($source_url);
-			    $background = imagecolorallocate($image, 0, 0, 0);	    
+			    $background = imagecolorallocate($image, 200, 200, 200);	    
 			    imagecolortransparent($image, $background);
 			    imagealphablending($image, false);
 			    imagesavealpha($image, true);
-			    $quality = (100-$quality)*.1;
-			    imagepng($image, $compressed_file, $quality);	
+			    $quality = "9";
+			    imagepng($image, $compressed_file, $quality);
 		    }
 		}
-
+	
 		$this->return_data = base_url()."coldpressed_img/".$fname;
 	}
 }
 /* End of file pi.coldpress.php */ 
-/* Location: /__ee_admin/user/addons/coldpress/pi.coldpress.php */
+/* Location: /system/user/addons/coldpress/pi.coldpress.php */
 ?>
